@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynasty 8 - Warehouses</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/date-picker.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a href="dashboard.html" class="brand">
+        <img
+          src="assets/images/dynasty8-logo.png"
+          alt="Dynasty 8"
+          class="nav-logo"
+        />
+      </a>
+      <nav class="nav-links">
+        <a href="dashboard.html">Dashboard</a>
+        <a href="houses.html">Houses</a>
+        <a href="warehouses.html">Warehouses</a>
+        <a href="completed.html">Completed</a>
+        <a href="repossessions.html">Repossessions</a>
+      </nav>
+      <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+    </header>
+
+    <main class="page" data-property-type="warehouse">
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow">ACTIVE PAYMENT PLANS</p>
+          <h1>Warehouses</h1>
+          <p class="muted">
+            Track balances, instalments, chase history and payment activity.
+          </p>
+        </div>
+        <button id="openPlanModal" class="btn btn-primary">
+          + New Payment Plan
+        </button>
+      </section>
+
+      <section class="toolbar plan-toolbar">
+        <input
+          id="planSearch"
+          type="search"
+          placeholder="Search name, Citizen ID, phone or property ID..."
+        />
+        <select id="statusFilter" aria-label="Payment status">
+          <option value="all">All active</option>
+          <option value="uptodate">Up to date</option>
+          <option value="duetoday">Due today</option>
+          <option value="overdue">Overdue</option>
+        </select>
+        <select id="sortPlans" aria-label="Sort plans">
+          <option value="priority">Priority first</option>
+          <option value="overdue">Most overdue</option>
+          <option value="next">Next payment</option>
+          <option value="balance">Highest balance</option>
+          <option value="name">Name A-Z</option>
+        </select>
+      </section>
+
+      <section id="plansList" class="cards-grid"></section>
+    </main>
+
+    <div id="planModal" class="modal hidden">
+      <div class="modal-backdrop" data-close-modal></div>
+      <section class="modal-card">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">NEW PLAN</p>
+            <h2>Create Warehouse Payment Plan</h2>
+          </div>
+          <button class="icon-btn" type="button" data-close-modal>×</button>
+        </div>
+
+        <form id="planForm" class="form-grid">
+          <label>Client Name<input id="clientName" required /></label>
+          <label>Phone Number<input id="phone" /></label>
+          <label>Citizen ID<input id="citizenId" required /></label>
+          <label>Warehouse ID<input id="propertyId" required /></label>
+          <label
+            >Total Price<input id="totalPrice" type="number" min="0" required
+          /></label>
+          <label
+            >Down Payment<input
+              id="downPayment"
+              type="number"
+              min="0"
+              value="0"
+              required
+          /></label>
+          <label
+            >Number of Instalments<input
+              id="installments"
+              type="number"
+              min="1"
+              value="1"
+              required
+          /></label>
+          <label>
+            Payment Frequency
+            <select id="paymentFrequency" required>
+              <option value="weekly">Weekly</option>
+              <option value="biweekly">Every 2 Weeks</option>
+              <option value="monthly">Monthly</option>
+            </select>
+          </label>
+          <label>
+            First Payment Due
+            <div class="date-picker-wrap">
+              <input
+                id="firstPaymentDate"
+                type="text"
+                placeholder="MM/DD/YYYY"
+                autocomplete="off"
+                required
+              />
+              <button
+                id="openDatePicker"
+                class="calendar-btn"
+                type="button"
+                aria-label="Open calendar"
+                title="Open calendar"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M7 2v3M17 2v3M3.5 9h17M5.5 4.5h13a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2Z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </label>
+          <label class="span-2"
+            >Notes<textarea id="notes" rows="3"></textarea>
+          </label>
+
+          <div class="calculation-box span-2">
+            <div>
+              <span>Remaining balance</span
+              ><strong id="remainingPreview">$0</strong>
+            </div>
+            <div>
+              <span>Approx. instalment</span
+              ><strong id="installmentPreview">$0</strong>
+            </div>
+          </div>
+
+          <div class="modal-actions span-2">
+            <button type="button" class="btn btn-ghost" data-close-modal>
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">Create Plan</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <div id="editPlanModal" class="modal hidden">
+      <div class="modal-backdrop" data-close-edit-plan></div>
+      <section class="modal-card">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">EDIT PLAN</p>
+            <h2>Update Plan Details</h2>
+          </div>
+          <button class="icon-btn" type="button" data-close-edit-plan>×</button>
+        </div>
+        <form id="editPlanForm" class="form-grid">
+          <label>Client Name<input id="editClientName" required /></label>
+          <label>Phone Number<input id="editPhone" /></label>
+          <label>Citizen ID<input id="editCitizenId" required /></label>
+          <label>Warehouse ID<input id="editPropertyId" required /></label>
+          <label>
+            Payment Frequency
+            <select id="editPaymentFrequency" required>
+              <option value="weekly">Weekly</option>
+              <option value="biweekly">Every 2 Weeks</option>
+              <option value="monthly">Monthly</option>
+            </select>
+          </label>
+          <label>
+            First Payment Due
+            <div class="date-picker-wrap">
+              <input
+                id="editFirstPaymentDate"
+                type="text"
+                placeholder="MM/DD/YYYY"
+                autocomplete="off"
+                required
+              />
+              <button
+                id="openEditDatePicker"
+                class="calendar-btn"
+                type="button"
+                aria-label="Open calendar"
+                title="Open calendar"
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path
+                    d="M7 2v3M17 2v3M3.5 9h17M5.5 4.5h13a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-13a2 2 0 0 1-2-2v-12a2 2 0 0 1 2-2Z"
+                  />
+                </svg>
+              </button>
+            </div>
+          </label>
+          <label class="span-2"
+            >Notes<textarea id="editNotes" rows="4"></textarea>
+          </label>
+          <p class="form-hint span-2">
+            Changing the first payment date or frequency recalculates future
+            unpaid instalment dates. Already-paid instalments keep their
+            original due dates.
+          </p>
+          <div class="modal-actions span-2">
+            <button type="button" class="btn btn-ghost" data-close-edit-plan>
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <div id="viewPlanModal" class="modal hidden">
+      <div class="modal-backdrop" data-close-view-plan></div>
+      <section class="modal-card plan-details-modal">
+        <div class="modal-header">
+          <div>
+            <p class="eyebrow">PAYMENT PLAN</p>
+            <h2>Plan Details</h2>
+          </div>
+          <button class="icon-btn" type="button" data-close-view-plan>×</button>
+        </div>
+        <div id="planDetails"></div>
+      </section>
+    </div>
+
+    <script src="assets/js/custom-select.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script type="module" src="assets/js/plans.js"></script>
+    <div class="site-watermark">
+      <span>Made by Hannelia</span>
+      <small>Discord: hannelia</small>
+    </div>
+  </body>
+</html>

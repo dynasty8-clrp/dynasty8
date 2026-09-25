@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynasty 8 - Login</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body class="login-page">
+    <main class="login-shell">
+      <section class="login-card">
+        <img
+          src="assets/images/dynasty8-logo.png"
+          alt="Dynasty 8"
+          class="login-logo"
+        />
+
+        <h1>Real Estate Management</h1>
+        <p class="muted">
+          Sign in to manage payment plans, completed sales and repossessions.
+        </p>
+
+        <form id="loginForm" class="form-stack">
+          <label>
+            Email
+            <input type="email" id="email" placeholder="" required />
+          </label>
+
+          <label>
+            Password
+            <input type="password" id="password" placeholder="" required />
+          </label>
+
+          <button class="btn btn-primary btn-full" type="submit">
+            Sign In
+          </button>
+          <p id="loginMessage" class="form-message"></p>
+        </form>
+      </section>
+    </main>
+
+    <script type="module" src="assets/js/login.js"></script>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynasty 8 - Dashboard</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a href="dashboard.html" class="brand"
+        ><img
+          src="assets/images/dynasty8-logo.png"
+          alt="Dynasty 8"
+          class="nav-logo"
+      /></a>
+      <nav class="nav-links">
+        <a href="dashboard.html">Dashboard</a><a href="houses.html">Houses</a
+        ><a href="warehouses.html">Warehouses</a
+        ><a href="completed.html">Completed</a
+        ><a href="repossessions.html">Repossessions</a>
+      </nav>
+      <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+    </header>
+
+    <main class="page">
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow">DYNASTY 8 REAL ESTATE</p>
+          <h1>Dashboard</h1>
+          <p class="muted">
+            See what is late, what needs chasing and what is coming up next.
+          </p>
+        </div>
+      </section>
+
+      <section id="priorityBanner" class="priority-banner hidden">
+        <div class="priority-icon">!</div>
+        <div>
+          <strong>Priority accounts need attention</strong>
+          <p id="priorityBannerText"></p>
+        </div>
+      </section>
+
+      <section class="dashboard-stats">
+        <article class="stat-card">
+          <span>Active Plans</span><strong id="activePlansCount">0</strong
+          ><small>Current house and warehouse plans</small>
+        </article>
+        <article class="stat-card stat-overdue">
+          <span>Overdue Payments</span
+          ><strong id="overduePaymentsCount">0</strong
+          ><small id="overdueAmount">$0 outstanding</small>
+        </article>
+        <article class="stat-card stat-today">
+          <span>Due Today</span><strong id="dueTodayCount">0</strong
+          ><small>Payments requiring attention today</small>
+        </article>
+        <article class="stat-card">
+          <span>Due Next 7 Days</span
+          ><strong id="upcomingPaymentsCount">0</strong
+          ><small>Upcoming instalments</small>
+        </article>
+        <article class="stat-card">
+          <span>Completed Sales</span><strong id="completedPlansCount">0</strong
+          ><small>Paid in full</small>
+        </article>
+        <article class="stat-card">
+          <span>Repossessions</span><strong id="repossessionsCount">0</strong
+          ><small>Total repossession records</small>
+        </article>
+      </section>
+
+      <section class="dashboard-section priority-section">
+        <div class="dashboard-section-heading">
+          <div>
+            <p class="eyebrow">URGENT</p>
+            <h2>Priority Accounts</h2>
+            <p class="muted">
+              Accounts with 2+ missed payments or an instalment at least 7 days
+              late.
+            </p>
+          </div>
+        </div>
+        <div id="priorityAccountsList" class="priority-account-list"></div>
+      </section>
+
+      <section class="dashboard-section overdue-section">
+        <div class="dashboard-section-heading">
+          <div>
+            <p class="eyebrow">ACTION REQUIRED</p>
+            <h2>Payments to Chase</h2>
+            <p class="muted">
+              Every unpaid instalment that has passed its due date.
+            </p>
+          </div>
+          <span id="overdueBadge" class="dashboard-count-badge overdue-badge"
+            >0 overdue</span
+          >
+        </div>
+        <div id="overduePaymentsList" class="dashboard-payment-list"></div>
+      </section>
+
+      <section class="dashboard-section">
+        <div class="dashboard-section-heading">
+          <div>
+            <p class="eyebrow">TODAY</p>
+            <h2>Payments Due Today</h2>
+            <p class="muted">Instalments scheduled for today.</p>
+          </div>
+        </div>
+        <div id="dueTodayList" class="dashboard-payment-list"></div>
+      </section>
+
+      <section class="dashboard-section">
+        <div class="dashboard-section-heading">
+          <div>
+            <p class="eyebrow">COMING UP</p>
+            <h2>Upcoming Payments</h2>
+            <p class="muted">Payments due within the next seven days.</p>
+          </div>
+        </div>
+        <div id="upcomingPaymentsList" class="dashboard-payment-list"></div>
+      </section>
+    </main>
+
+    <script type="module" src="assets/js/dashboard.js"></script>
+    <div class="site-watermark">
+      <span>Made by Hannelia</span>
+      <small>Discord: hannelia</small>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dynasty 8 - Repossessions</title>
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a href="dashboard.html" class="brand"
+        ><img
+          src="assets/images/dynasty8-logo.png"
+          alt="Dynasty 8"
+          class="nav-logo"
+      /></a>
+      <nav class="nav-links">
+        <a href="dashboard.html">Dashboard</a><a href="houses.html">Houses</a
+        ><a href="warehouses.html">Warehouses</a
+        ><a href="completed.html">Completed</a
+        ><a href="repossessions.html">Repossessions</a>
+      </nav>
+      <button id="logoutBtn" class="btn btn-ghost">Logout</button>
+    </header>
+
+    <main class="page">
+      <section class="page-heading">
+        <div>
+          <p class="eyebrow">PROPERTY RECORDS</p>
+          <h1>Repossessions</h1>
+          <p class="muted">
+            Search repossessed properties and restore a plan if a repossession
+            was made by mistake.
+          </p>
+        </div>
+      </section>
+      <section class="toolbar records-toolbar">
+        <input
+          id="repoSearch"
+          type="search"
+          placeholder="Search name, Citizen ID, phone, property ID or reason..."
+        />
+        <select id="repoTypeFilter">
+          <option value="all">All property types</option>
+          <option value="house">Houses</option>
+          <option value="warehouse">Warehouses</option>
+        </select>
+      </section>
+      <section id="repoList" class="cards-grid"></section>
+    </main>
+
+    <script src="assets/js/custom-select.js"></script>
+    <script type="module" src="assets/js/repossessions.js"></script>
+    <div class="site-watermark">
+      <span>Made by Hannelia</span>
+      <small>Discord: hannelia</small>
+    </div>
+  </body>
+</html>
