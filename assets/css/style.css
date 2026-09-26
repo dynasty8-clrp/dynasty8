@@ -14,7 +14,7 @@
   --gold-dark: #c9aa24;
   --danger: #c95656;
   --danger-dark: #9e3939;
-  --shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+  --shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
 }
 
 * {
@@ -1709,4 +1709,16 @@ label {
   .site-watermark small {
     font-size: 9px;
   }
+}
+
+/* =========================
+   SHADOW EDITS
+========================= */
+
+.panel,
+.plan-card,
+.repo-card,
+.stat-card,
+.login-card {
+  box-shadow: var(--shadow);
 }
