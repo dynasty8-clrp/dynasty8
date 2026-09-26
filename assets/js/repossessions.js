@@ -44,7 +44,16 @@ function formatDateUS(dateString) {
 
 function planLink(repo) {
   if (!repo.paymentPlanId) return null;
-  return `${repo.propertyType === "warehouse" ? "warehouses.html" : "houses.html"}?plan=${encodeURIComponent(repo.paymentPlanId)}`;
+
+  let page = "houses.html";
+
+  if (repo.propertyType === "warehouse") {
+    page = "warehouses.html";
+  } else if (repo.propertyType === "business") {
+    page = "businesses.html";
+  }
+
+  return `${page}?plan=${encodeURIComponent(repo.paymentPlanId)}`;
 }
 
 async function restoreRepossession(repoId) {

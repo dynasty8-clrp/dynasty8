@@ -49,7 +49,15 @@ function formatTimestampUS(value) {
 }
 
 function planLink(plan) {
-  return `${plan.propertyType === "warehouse" ? "warehouses.html" : "houses.html"}?plan=${encodeURIComponent(plan.id)}`;
+  let page = "houses.html";
+
+  if (plan.propertyType === "warehouse") {
+    page = "warehouses.html";
+  } else if (plan.propertyType === "business") {
+    page = "businesses.html";
+  }
+
+  return `${page}?plan=${encodeURIComponent(plan.id)}`;
 }
 
 async function restoreArchivedPlan(planId) {

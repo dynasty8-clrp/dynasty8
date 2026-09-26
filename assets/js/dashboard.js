@@ -65,7 +65,14 @@ function escapeHtml(value = "") {
 }
 
 function getPlanLink(plan) {
-  const page = plan.propertyType === "warehouse" ? "warehouses.html" : "houses.html";
+  let page = "houses.html";
+
+  if (plan.propertyType === "warehouse") {
+    page = "warehouses.html";
+  } else if (plan.propertyType === "business") {
+    page = "businesses.html";
+  }
+
   return `${page}?plan=${encodeURIComponent(plan.id)}`;
 }
 
